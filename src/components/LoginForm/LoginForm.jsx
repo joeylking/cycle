@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Grid, Paper, TextField, Button } from '@mui/material';
 
-const LoginForm = ({ setToken, setUser }) => {
+const LoginForm = ({ setUser }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -26,6 +26,7 @@ const LoginForm = ({ setToken, setUser }) => {
       headers: { Authorization: `Bearer ${token}` },
     });
     setUser(response.data);
+    console.log(response.data);
     return response.data;
   };
 

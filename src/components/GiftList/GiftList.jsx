@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container } from '@mui/material';
+import { Container } from 'react-bootstrap';
 
 const GiftList = () => {
   const [gifts, setGifts] = useState([]);

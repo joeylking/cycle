@@ -14,6 +14,11 @@ import History from './History/History';
 function App() {
   const [user, setUser] = useState();
   const [authenticated, setAuthenticated] = useState(false);
+  const [gifts, setGifts] = useState([]);
+
+  useEffect(() => {
+    getGifts();
+  }, []);
 
   useEffect(() => {
     setAuthenticated(isAuthenticated());
@@ -31,6 +36,17 @@ function App() {
     setAuthenticated(false);
   };
 
+  const getGifts = async () => {
+    const token = localStorage.getItem('token');
+    const response = await axios({
+      method: 'GET',
+      url: 'http://127.0.0.1:8000/api/gifts/',
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    setGifts(response.data);
+    return response;
+  };
+
   const getUser = async token => {
     const response = await axios({
       method: 'GET',
@@ -46,10 +62,14 @@ function App() {
     <div className='App'>
       <NavBar bg='light' expand='lg' user={user} logout={logout} />
       <Routes>
-        <Route path='/' exact element={<GiftList />} />
+        <Route
+          path='/'
+          exact
+          element={<GiftList user={user} gifts={gifts} />}
+        />
         <Route path='/Login' element={<LoginForm />} />
         <Route path='/Register' element={<RegisterForm />} />
-        <Route path='/Give' element={<Give />} />
+        <Route path='/Give' element={<Give user={user} gifts={gifts} />} />
         <Route path='/Detail' element={<GiftDetail />} />
         <Route path='/Interested' element={<InterestedList />} />
         <Route path='/Profile' element={<UserProfile />} />

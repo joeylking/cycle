@@ -2,26 +2,14 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container } from 'react-bootstrap';
 
-const GiftList = () => {
-  const [gifts, setGifts] = useState([]);
-
-  useEffect(() => {
-    async function getGifts() {
-      const token = localStorage.getItem('token');
-      const response = await axios({
-        method: 'GET',
-        url: 'http://127.0.0.1:8000/api/gifts/',
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setGifts(response.data);
-      return response;
-    }
-    getGifts();
-  }, []);
-
+const GiftList = ({ user, gifts }) => {
+  const active = gifts.filter(g => g.active === true);
+  const filtered = active.filter(g => g.giver.id !== user.id);
+  console.log(active);
+  console.log(filtered);
   return (
     <Container>
-      {gifts.map(g => (
+      {filtered.map(g => (
         <div>
           <h1>{g.name}</h1>
         </div>

@@ -42,11 +42,12 @@ const NavBar = ({ user, logout }) => {
               <>
                 <img
                   src={`http://127.0.0.1:8000${user.profile_pic}`}
-                  width='30'
-                  height='30'
-                  className='d-inline-block align-top rounded-circle'
-                  alt='Cycle logo'
+                  width='35'
+                  height='35'
+                  className='d-inline-block rounded-circle border border-white'
+                  alt={user.first_name}
                 />
+
                 <NavDropdown
                   title={user.first_name}
                   id='navbarScrollingDropdown'

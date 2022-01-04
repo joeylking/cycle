@@ -137,7 +137,9 @@ class App extends Component {
           <Route path='/Detail' element={<GiftDetail />} />
           <Route
             path='/Interested'
-            element={<InterestedList gifts={this.state.gifts} />}
+            element={
+              <InterestedList gifts={this.state.gifts} user={this.state.user} />
+            }
           />
           <Route path='/Profile' element={<UserProfile />} />
           <Route path='/History' element={<History />} />

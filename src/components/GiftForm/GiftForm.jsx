@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Button, Form } from 'react-bootstrap';
 
 class GiftForm extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class GiftForm extends Component {
       condition: this.props.gift.condition,
       active: this.props.gift.active,
       interested_users: this.props.gift.interested_users,
-      expiration: this.props.gift.expiration,
+      hours_active: this.props.gift.hours_active,
       image: this.props.gift.image,
     };
   }
@@ -43,13 +44,15 @@ class GiftForm extends Component {
       condition: this.state.condition,
       active: this.state.active,
       interested_users: this.state.interested_users,
-      expiration: this.state.expiration,
+      hours_active: parseInt(this.state.hours_active),
+      image: null,
     };
+    console.log(gift);
     this.props.submit(gift);
   };
   render() {
     return (
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={this.handleSubmit}>
         <Form.Group>
           <Form.Label htmlFor=''>Name</Form.Label>
           <Form.Control
@@ -87,11 +90,11 @@ class GiftForm extends Component {
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label htmlFor=''>Expiration</Form.Label>
+          <Form.Label htmlFor=''>Hours Active</Form.Label>
           <Form.Control
-            type='datetime-local'
-            name='date'
-            value={this.state.expiration}
+            type='number'
+            name='hours_active'
+            value={this.state.hours_active}
             onChange={this.handleChange}
           />
         </Form.Group>

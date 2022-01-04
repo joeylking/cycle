@@ -18,46 +18,7 @@ const LoginForm = ({ getUser }) => {
     return token;
   };
 
-  //   const getUser = async () => {
-  //     const token = localStorage.getItem('token');
-  //     const response = await axios({
-  //       method: 'GET',
-  //       url: 'http://127.0.0.1:8000/api/auth/user/',
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     });
-  //     setUser(response.data);
-  //     console.log(response.data);
-  //     return response.data;
-  //   };
-
   return (
-    // <Grid>
-    //   <Paper elevation={3} style={paperStyle}>
-    //     <Grid align='center'>
-    //       <h2>Please sign in:</h2>
-    //     </Grid>
-    //     <TextField
-    //       label='Username'
-    //       placeholder='Your username'
-    //       value={username}
-    //       onChange={e => setUsername(e.target.value)}
-    //       fullWidth
-    //       margin='normal'
-    //       required
-    //     />
-    //     <TextField
-    //       label='Password'
-    //       placeholder='Your password'
-    //       value={password}
-    //       onChange={e => setPassword(e.target.value)}
-    //       type='password'
-    //       fullWidth
-    //       margin='normal'
-    //       required
-    //     />
-    //     <Button onClick={handleSubmit}>Sign In</Button>
-    //   </Paper>
-    // </Grid>
     <Container>
       <Form onSubmit={handleSubmit}>
         <Form.Label> Username: </Form.Label>

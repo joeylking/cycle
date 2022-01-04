@@ -38,6 +38,7 @@ class App extends Component {
       authenticated: false,
       user: '',
     });
+    window.location = '/';
   };
 
   getGifts = async () => {

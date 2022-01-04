@@ -15,6 +15,7 @@ const LoginForm = ({ getUser }) => {
     const token = response.data.access;
     localStorage.setItem('token', token);
     getUser(token);
+    window.reload();
     return token;
   };
 

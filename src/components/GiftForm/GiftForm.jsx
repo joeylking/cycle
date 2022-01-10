@@ -29,6 +29,11 @@ class GiftForm extends Component {
   //     "expiration": "2022-01-03T22:10:28Z"
   // }
   handleChange = event => {
+    if ([event.target.name] === 'image') {
+      this.setState({
+        image: event.target.files,
+      });
+    }
     this.setState({
       [event.target.name]: event.target.value,
     });

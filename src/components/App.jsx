@@ -18,6 +18,7 @@ class App extends Component {
       gifts: [],
       user: '',
       authenticated: false,
+      giftID: '',
     };
   }
   componentDidMount() {
@@ -73,7 +74,9 @@ class App extends Component {
       method: 'POST',
       url: 'http://127.0.0.1:8000/api/gifts/',
       data: gift,
-      headers: { Authorization: `Bearer ${token}` },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
     console.log(response);
     this.getGifts();
@@ -102,6 +105,24 @@ class App extends Component {
     console.log(response);
     this.getGifts();
   };
+
+  // getGift = async giftID => {
+  //   console.log('getGift');
+  //   const token = localStorage.getItem('token');
+  //   const response = await axios({
+  //     method: 'GET',
+  //     url: `http://127.0.0.1:8000/api/gifts/${giftID}/`,
+  //     headers: { Authorization: `Bearer ${token}` },
+  //   }).then(response => this.setState({ gift: response.data }));
+  //   console.log(response);
+  //   console.log(`gift is now: ${this.state.gift.name}`);
+  // };
+
+  setGift = gift => {
+    this.setState({
+      gift: gift,
+    });
+  };
   render() {
     return (
       <div className='App'>
@@ -120,6 +141,7 @@ class App extends Component {
                 user={this.state.user}
                 gifts={this.state.gifts}
                 addInterested={this.addInterested}
+                setGift={this.setGift}
               />
             }
           />
@@ -135,7 +157,16 @@ class App extends Component {
               />
             }
           />
-          <Route path='/Detail' element={<GiftDetail />} />
+          <Route
+            path='/Detail'
+            element={
+              <GiftDetail
+                gift={this.state.gift}
+                user={this.state.user}
+                addInterested={this.addInterested}
+              />
+            }
+          />
           <Route
             path='/Interested'
             element={

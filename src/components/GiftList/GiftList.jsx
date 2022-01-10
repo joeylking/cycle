@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import { Container, Card, Button, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-const GiftList = ({ user, gifts, addInterested }) => {
-  const [gift, setGift] = useState();
+const GiftList = ({ user, gifts, addInterested, setGift }) => {
   const active = gifts.filter(g => g.active === true);
   const filtered = active.filter(g => g.giver !== user.id);
-  console.log(active);
-  console.log(filtered);
-  console.log(user.id);
 
   const interestedClick = eGift => {
     if (!eGift.interested_users.includes(user.id)) {
@@ -17,22 +14,32 @@ const GiftList = ({ user, gifts, addInterested }) => {
       console.log('Already interested');
     }
   };
+
+  const handleClick = gift => {
+    setGift(gift);
+  };
   return (
     <Container>
       <Row className='justify-content-center d-flex flex-wrap align-items-center mt-3'>
-        {filtered.map(g => (
+        {filtered.map(gift => (
           <Col>
             <Card className='text-centered' style={{ width: '18rem' }}>
               <Card.Img
                 variant='top'
-                src={`http://127.0.0.1:8000${g.image}`}
+                src={`http://127.0.0.1:8000${gift.image}`}
                 style={{ height: 100, width: 100 }}
               />
               <Card.Body>
-                <Card.Title>{g.name}</Card.Title>
-                <Card.Text>{g.description}</Card.Text>
-                <Button variant='primary'>Details</Button>{' '}
-                <Button variant='primary' onClick={() => interestedClick(g)}>
+                <Card.Title>{gift.name}</Card.Title>
+                <Card.Text>{gift.description}</Card.Text>
+                <Link
+                  to='/Detail'
+                  className='btn btn-primary'
+                  onClick={() => handleClick(gift)}
+                >
+                  Details
+                </Link>{' '}
+                <Button variant='primary' onClick={() => interestedClick(gift)}>
                   Interested
                 </Button>
               </Card.Body>

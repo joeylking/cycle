@@ -20,6 +20,8 @@ class App extends Component {
       user: '',
       authenticated: false,
       giftID: '',
+      filteredGifts: [],
+      currentQuery: '',
     };
   }
   componentDidMount() {
@@ -121,6 +123,25 @@ class App extends Component {
     );
     this.getGifts();
   };
+
+  filterGifts = query => {
+    const filtered = this.state.gifts.filter(gift => {
+      if (query === '') {
+        return gift;
+      } else if (
+        gift.name.toLowerCase().includes(query.toLowerCase()) ||
+        gift.description.toLowerCase().includes(query.toLowerCase()) ||
+        gift.category.toLowerCase().includes(query.toLowerCase())
+      ) {
+        return gift;
+      }
+    });
+    this.setState({
+      filteredGifts: filtered,
+      currentQuery: query,
+    });
+  };
+
   render() {
     return (
       <div className='App'>
@@ -137,9 +158,10 @@ class App extends Component {
             element={
               <GiftList
                 user={this.state.user}
-                gifts={this.state.gifts}
+                gifts={this.state.filteredGifts}
                 editInterested={this.editInterested}
                 setGift={this.setGift}
+                filterGifts={this.filterGifts}
               />
             }
           />

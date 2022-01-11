@@ -5,7 +5,8 @@ const WinnersList = gifts => {
   console.log(gifts);
   const filtered = gifts.gifts.filter(gift => gift.winner !== null);
   return (
-    <Container>
+    <Container className='mt-2 text-center'>
+      <h1>🎉 Winners 🎉</h1>
       <ListGroup>
         {filtered.map(g => (
           <>

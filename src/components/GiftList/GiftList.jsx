@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Search from '../Search/Search';
 
-const GiftList = ({ user, gifts, editInterested, setGift }) => {
+const GiftList = ({ user, gifts, editInterested, setGift, filterGifts }) => {
   const active = gifts.filter(g => g.active === true);
   const filtered = active.filter(g => g.giver.id !== user.id);
 
@@ -22,6 +22,7 @@ const GiftList = ({ user, gifts, editInterested, setGift }) => {
   };
   return (
     <Container>
+      <Search filterGifts={filterGifts} />
       <Row className='justify-content-center d-flex flex-wrap align-items-center mt-3'>
         {filtered.map(gift => (
           <Col>

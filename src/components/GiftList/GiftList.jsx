@@ -23,14 +23,20 @@ const GiftList = ({ user, gifts, editInterested, setGift, filterGifts }) => {
   return (
     <Container>
       <Search filterGifts={filterGifts} />
-      <Row className='justify-content-center d-flex flex-wrap align-items-center mt-3'>
+      <Row
+        md={4}
+        className='justify-content-center d-flex flex-wrap align-items-center mt-3 g-4'
+      >
         {filtered.map(gift => (
           <Col>
-            <Card className='text-centered' style={{ width: '18rem' }}>
+            <Card
+              className='text-centered'
+              style={{ width: '18rem', height: '25rem' }}
+            >
               <Card.Img
                 variant='top'
                 src={`http://127.0.0.1:8000${gift.image}`}
-                style={{ height: 100, width: 100 }}
+                style={{ height: '200px' }}
               />
               <Card.Body>
                 <Card.Title>{gift.name}</Card.Title>

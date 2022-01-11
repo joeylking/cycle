@@ -6,6 +6,10 @@ import logo from '../../img/logo.svg';
 
 const NavBar = ({ user, logout }) => {
   const [showModal, setShowModal] = useState(false);
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
   return (
     <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
       <Container>
@@ -74,12 +78,12 @@ const NavBar = ({ user, logout }) => {
               </>
             )}
           </Nav>
-          <Modal show={showModal} onHide={() => setShowModal(false)}>
+          <Modal show={showModal} onHide={closeModal}>
             <Modal.Header closeButton>
               <Modal.Title>Please Login</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <LoginForm />
+              <LoginForm closeModal={closeModal} />
             </Modal.Body>
           </Modal>
         </Navbar.Collapse>

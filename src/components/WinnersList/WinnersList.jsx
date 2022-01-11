@@ -7,7 +7,7 @@ const WinnersList = gifts => {
   return (
     <Container className='mt-2 text-center'>
       <h1>🎉 Winners 🎉</h1>
-      <ListGroup>
+      <ListGroup variant='flush'>
         {filtered.map(g => (
           <>
             <ListGroup.Item>

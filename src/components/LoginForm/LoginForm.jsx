@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Form, Button, Container } from 'react-bootstrap';
 
-const LoginForm = ({ getUser }) => {
+const LoginForm = ({ getUser, closeModal }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,7 +15,8 @@ const LoginForm = ({ getUser }) => {
     const token = response.data.access;
     localStorage.setItem('token', token);
     getUser(token);
-    window.reload();
+    closeModal();
+    window.location = '/';
     return token;
   };
 

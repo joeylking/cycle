@@ -11,6 +11,7 @@ import InterestedList from './InterestedList/InterestedList';
 import UserProfile from './UserProfile/UserProfile';
 import History from './History/History';
 import WinnersList from './WinnersList/WinnersList';
+import LandingPage from './LandingPage/LandingPage';
 
 class App extends Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class App extends Component {
     try {
       this.getUser(token);
       this.getGifts();
+      this.filterGifts('initialSearchQuery');
     } catch {
       console.log('Something went wrong');
     }
@@ -126,7 +128,7 @@ class App extends Component {
 
   filterGifts = query => {
     const filtered = this.state.gifts.filter(gift => {
-      if (query === '') {
+      if (query === 'initialSearchQuery') {
         return gift;
       } else if (
         gift.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -156,13 +158,17 @@ class App extends Component {
             path='/'
             exact
             element={
-              <GiftList
-                user={this.state.user}
-                gifts={this.state.filteredGifts}
-                editInterested={this.editInterested}
-                setGift={this.setGift}
-                filterGifts={this.filterGifts}
-              />
+              this.state.user ? (
+                <GiftList
+                  user={this.state.user}
+                  gifts={this.state.filteredGifts}
+                  editInterested={this.editInterested}
+                  setGift={this.setGift}
+                  filterGifts={this.filterGifts}
+                />
+              ) : (
+                <LandingPage />
+              )
             }
           />
           <Route path='/Login' element={<LoginForm />} />

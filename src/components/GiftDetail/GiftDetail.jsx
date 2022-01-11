@@ -98,7 +98,10 @@ const GiftDetail = ({ gift, user, editInterested }) => {
       {console.log(comments)}
       <Row className='mt-3'>
         <Col>
-          <img src={`http://127.0.0.1:8000${gift.image}`} />
+          <img
+            src={`http://127.0.0.1:8000${gift.image}`}
+            style={{ height: '25rem' }}
+          />
         </Col>
         <Col>
           <h1>{gift.name}</h1>
@@ -115,17 +118,21 @@ const GiftDetail = ({ gift, user, editInterested }) => {
           </p>
           <p>Condition: {gift.condition}</p>
           <p>Description: {gift.description}</p>
-          {gift.interested_users.includes(user.id) ? (
-            <Button
-              variant='outline-primary'
-              onClick={() => interestedClick(gift)}
-            >
-              Not Interested
-            </Button>
-          ) : (
-            <Button variant='primary' onClick={() => interestedClick(gift)}>
-              Interested
-            </Button>
+          {gift.giver.id !== user.id && (
+            <>
+              {gift.interested_users.includes(user.id) ? (
+                <Button
+                  variant='outline-primary'
+                  onClick={() => interestedClick(gift)}
+                >
+                  Not Interested
+                </Button>
+              ) : (
+                <Button variant='primary' onClick={() => interestedClick(gift)}>
+                  Interested
+                </Button>
+              )}
+            </>
           )}
         </Col>
       </Row>

@@ -31,8 +31,8 @@ const NavBar = ({ user, logout }) => {
                 <Nav.Link as={Link} to='/Give'>
                   Give
                 </Nav.Link>
-                <Nav.Link as={Link} to='/Interested'>
-                  Interested
+                <Nav.Link as={Link} to='/Winners'>
+                  Winners
                 </Nav.Link>
               </>
             )}

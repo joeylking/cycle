@@ -10,6 +10,7 @@ import Give from './Give/Give';
 import InterestedList from './InterestedList/InterestedList';
 import UserProfile from './UserProfile/UserProfile';
 import History from './History/History';
+import WinnersList from './WinnersList/WinnersList';
 
 class App extends Component {
   constructor(props) {
@@ -106,22 +107,19 @@ class App extends Component {
     this.getGifts();
   };
 
-  // getGift = async giftID => {
-  //   console.log('getGift');
-  //   const token = localStorage.getItem('token');
-  //   const response = await axios({
-  //     method: 'GET',
-  //     url: `http://127.0.0.1:8000/api/gifts/${giftID}/`,
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   }).then(response => this.setState({ gift: response.data }));
-  //   console.log(response);
-  //   console.log(`gift is now: ${this.state.gift.name}`);
-  // };
-
   setGift = gift => {
     this.setState({
       gift: gift,
     });
+  };
+
+  deleteGift = async gift => {
+    const token = localStorage.getItem('token');
+    const response = await axios.delete(
+      `http://127.0.0.1:8000/api/gifts/${gift.id}/`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    this.getGifts();
   };
   render() {
     return (
@@ -154,6 +152,9 @@ class App extends Component {
                 user={this.state.user}
                 gifts={this.state.gifts}
                 addGift={this.addGift}
+                setGift={this.setGift}
+                editGift={this.editGift}
+                deleteGift={this.deleteGift}
               />
             }
           />
@@ -172,6 +173,10 @@ class App extends Component {
             element={
               <InterestedList gifts={this.state.gifts} user={this.state.user} />
             }
+          />
+          <Route
+            path='/Winners'
+            element={<WinnersList gifts={this.state.gifts} />}
           />
           <Route path='/Profile' element={<UserProfile />} />
           <Route path='/History' element={<History />} />

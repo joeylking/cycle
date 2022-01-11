@@ -77,6 +77,17 @@ const GiftDetail = ({ gift, user, editInterested }) => {
     setParentID(id);
   };
 
+  const deleteComment = commentID => {
+    const token = localStorage.getItem('token');
+    axios.delete(
+      `http://127.0.0.1:8000/api/comments/${gift.id}/${commentID}/`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    let newComments = comments.filter(comment => comment.id !== commentID);
+    setComments(newComments);
+    getComments(gift.id);
+  };
+
   const parentComments = comments.filter(comment => comment.parent === null);
   return (
     <Container>
@@ -153,7 +164,12 @@ const GiftDetail = ({ gift, user, editInterested }) => {
                 </h3>
                 <p>{comment.content}</p>
                 {comment.author.id === user.id && (
-                  <Button size='sm' className='me-2' variant='danger'>
+                  <Button
+                    size='sm'
+                    className='me-2'
+                    variant='danger'
+                    onClick={() => deleteComment(comment.id)}
+                  >
                     Delete
                   </Button>
                 )}
@@ -192,7 +208,11 @@ const GiftDetail = ({ gift, user, editInterested }) => {
                       </h3>
                       <p>{reply.content}</p>
                       {reply.author.id === user.id && (
-                        <Button size='sm' variant='danger'>
+                        <Button
+                          size='sm'
+                          variant='danger'
+                          onClick={() => deleteComment(reply.id)}
+                        >
                           Delete
                         </Button>
                       )}

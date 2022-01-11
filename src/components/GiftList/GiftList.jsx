@@ -2,16 +2,18 @@ import { useState } from 'react';
 import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const GiftList = ({ user, gifts, addInterested, setGift }) => {
+const GiftList = ({ user, gifts, editInterested, setGift }) => {
   const active = gifts.filter(g => g.active === true);
   const filtered = active.filter(g => g.giver.id !== user.id);
 
-  const interestedClick = eGift => {
-    if (!eGift.interested_users.includes(user.id)) {
-      eGift.interested_users.push(user.id);
-      addInterested(eGift);
+  const interestedClick = gift => {
+    if (gift.interested_users.includes(user.id)) {
+      let arr = gift.interested_users.filter(iUser => iUser !== user.id);
+      gift.interested_users = arr;
+      editInterested(gift);
     } else {
-      console.log('Already interested');
+      gift.interested_users.push(user.id);
+      editInterested(gift);
     }
   };
 
@@ -39,9 +41,21 @@ const GiftList = ({ user, gifts, addInterested, setGift }) => {
                 >
                   Details
                 </Link>{' '}
-                <Button variant='primary' onClick={() => interestedClick(gift)}>
-                  Interested
-                </Button>
+                {gift.interested_users.includes(user.id) ? (
+                  <Button
+                    variant='outline-primary'
+                    onClick={() => interestedClick(gift)}
+                  >
+                    Not Interested
+                  </Button>
+                ) : (
+                  <Button
+                    variant='primary'
+                    onClick={() => interestedClick(gift)}
+                  >
+                    Interested
+                  </Button>
+                )}
               </Card.Body>
             </Card>
           </Col>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import CommentForm from '../CommentForm/CommentForm';
 
-const GiftDetail = ({ gift, user, addInterested }) => {
+const GiftDetail = ({ gift, user, editInterested }) => {
   const [comments, setComments] = useState([]);
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [showReplyInput, setShowReplyInput] = useState(0);
@@ -24,11 +24,13 @@ const GiftDetail = ({ gift, user, addInterested }) => {
   };
 
   const interestedClick = gift => {
-    if (!gift.interested_users.includes(user.id)) {
-      gift.interested_users.push(user.id);
-      addInterested(gift);
+    if (gift.interested_users.includes(user.id)) {
+      let arr = gift.interested_users.filter(iUser => iUser !== user.id);
+      gift.interested_users = arr;
+      editInterested(gift);
     } else {
-      console.log('Already interested');
+      gift.interested_users.push(user.id);
+      editInterested(gift);
     }
   };
 
@@ -99,9 +101,18 @@ const GiftDetail = ({ gift, user, addInterested }) => {
           </p>
           <p>Condition: {gift.condition}</p>
           <p>Description: {gift.description}</p>
-          <Button variant='primary' onClick={() => interestedClick(gift)}>
-            Interested
-          </Button>
+          {gift.interested_users.includes(user.id) ? (
+            <Button
+              variant='outline-primary'
+              onClick={() => interestedClick(gift)}
+            >
+              Not Interested
+            </Button>
+          ) : (
+            <Button variant='primary' onClick={() => interestedClick(gift)}>
+              Interested
+            </Button>
+          )}
         </Col>
       </Row>
       <Row>

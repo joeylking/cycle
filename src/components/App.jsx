@@ -94,7 +94,7 @@ class App extends Component {
     this.getGifts();
   };
 
-  addInterested = async gift => {
+  editInterested = async gift => {
     const token = localStorage.getItem('token');
     const response = await axios({
       method: 'PATCH',
@@ -140,7 +140,7 @@ class App extends Component {
               <GiftList
                 user={this.state.user}
                 gifts={this.state.gifts}
-                addInterested={this.addInterested}
+                editInterested={this.editInterested}
                 setGift={this.setGift}
               />
             }
@@ -163,7 +163,7 @@ class App extends Component {
               <GiftDetail
                 gift={this.state.gift}
                 user={this.state.user}
-                addInterested={this.addInterested}
+                editInterested={this.editInterested}
               />
             }
           />

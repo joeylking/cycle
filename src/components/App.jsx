@@ -178,8 +178,18 @@ class App extends Component {
             path='/Winners'
             element={<WinnersList gifts={this.state.gifts} />}
           />
-          <Route path='/Profile' element={<UserProfile />} />
-          <Route path='/History' element={<History />} />
+          <Route
+            path='/Profile'
+            element={
+              <UserProfile user={this.state.user} getUser={this.getUser} />
+            }
+          />
+          <Route
+            path='/History'
+            element={
+              <History user={this.state.user} gifts={this.state.gifts} />
+            }
+          />
         </Routes>
       </div>
     );

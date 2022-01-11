@@ -2,20 +2,6 @@ import { Component } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 
-// {
-//     "username": "brett",
-//     "password": "somePass@12",
-//     "email": "brett@devcodecamp.com",
-//     "first_name": "Brett",
-//     "last_name": "Johnson",
-//     "street": "123 Brett Ave",
-//     "city": "Milwaukee",
-//     "state": "Wisconsin",
-//     "zip_code": "53201",
-//     "profile_pic": null,
-//     "rating": null
-// }
-
 class RegisterForm extends Component {
   constructor(props) {
     super(props);

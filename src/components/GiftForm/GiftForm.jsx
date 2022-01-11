@@ -17,17 +17,7 @@ class GiftForm extends Component {
       image: this.props.gift.image,
     };
   }
-  // {
-  //     "giver": 3,
-  //     "winner": null,
-  //     "name": "Busted guitar",
-  //     "description": "Damaged guitar",
-  //     "category": "Musical Instruments",
-  //     "condition": "Poor",
-  //     "active": true,
-  //     "interested_users": [10, 11, 12],
-  //     "expiration": "2022-01-03T22:10:28Z"
-  // }
+
   handleChange = event => {
     if ([event.target.name] === 'image') {
       this.setState({
@@ -38,6 +28,7 @@ class GiftForm extends Component {
       [event.target.name]: event.target.value,
     });
   };
+
   handleSubmit = event => {
     event.preventDefault();
     const gift = {
@@ -55,6 +46,7 @@ class GiftForm extends Component {
     console.log(gift);
     this.props.submit(gift);
   };
+
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>

@@ -39,20 +39,23 @@ const GiftDetail = ({ gift, user, editInterested }) => {
     return replies;
   };
 
-  const addComment = text => {
+  const addComment = async text => {
     const token = localStorage.getItem('token');
     const comment = { author: user.id, gift: gift.id, content: text };
     console.log(comment);
-    const response = axios.post(
+    const response = await axios.post(
       `http://127.0.0.1:8000/api/comments/${gift.id}/`,
       comment,
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    getComments(gift.id);
+    console.log(response.data);
+    // setComments([...comments, response.data]);
+    console.log(comments);
     setShowCommentInput(false);
+    getComments(gift.id);
   };
 
-  const addReply = text => {
+  const addReply = async text => {
     const token = localStorage.getItem('token');
     const comment = {
       author: user.id,
@@ -61,7 +64,7 @@ const GiftDetail = ({ gift, user, editInterested }) => {
       parent: parentID,
     };
     console.log(comment);
-    const response = axios.post(
+    const response = await axios.post(
       `http://127.0.0.1:8000/api/comments/${gift.id}/`,
       comment,
       { headers: { Authorization: `Bearer ${token}` } }
@@ -69,6 +72,7 @@ const GiftDetail = ({ gift, user, editInterested }) => {
 
     setShowReplyInput(0);
     setParentID(null);
+    // setComments([...comments, response.data]);
     getComments(gift.id);
   };
 
@@ -77,15 +81,14 @@ const GiftDetail = ({ gift, user, editInterested }) => {
     setParentID(id);
   };
 
-  const deleteComment = commentID => {
+  const deleteComment = async commentID => {
     const token = localStorage.getItem('token');
-    axios.delete(
+    await axios.delete(
       `http://127.0.0.1:8000/api/comments/${gift.id}/${commentID}/`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
     let newComments = comments.filter(comment => comment.id !== commentID);
     setComments(newComments);
-    getComments(gift.id);
   };
 
   const parentComments = comments.filter(comment => comment.parent === null);

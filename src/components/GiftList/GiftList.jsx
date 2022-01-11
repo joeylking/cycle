@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const GiftList = ({ user, gifts, addInterested, setGift }) => {
   const active = gifts.filter(g => g.active === true);
-  const filtered = active.filter(g => g.giver !== user.id);
+  const filtered = active.filter(g => g.giver.id !== user.id);
 
   const interestedClick = eGift => {
     if (!eGift.interested_users.includes(user.id)) {

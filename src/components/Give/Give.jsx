@@ -37,7 +37,7 @@ class Give extends Component {
 
   render() {
     const filtered = this.props.gifts.filter(
-      g => g.giver === this.props.user.id
+      g => g.giver === this.props.user.username
     );
     return (
       <Container>

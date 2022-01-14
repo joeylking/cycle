@@ -177,7 +177,7 @@ class App extends Component {
               )
             }
           />
-          <Route path='/Login' element={<LoginForm />} />
+          <Route path='/Login' element={<LoginForm getUser={this.getUser} />} />
           <Route path='/Register' element={<RegisterForm />} />
           <Route
             path='/Give'

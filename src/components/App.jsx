@@ -12,12 +12,12 @@ import UserProfile from './UserProfile/UserProfile';
 import History from './History/History';
 import WinnersList from './WinnersList/WinnersList';
 import LandingPage from './LandingPage/LandingPage';
+import Loading from './Loading/Loading';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gifts: [],
       user: '',
       authenticated: false,
       giftID: '',
@@ -30,7 +30,6 @@ class App extends Component {
     try {
       this.getUser(token);
       this.getGifts();
-      this.filterGifts('initialSearchQuery');
     } catch {
       console.log('Something went wrong');
     }
@@ -57,6 +56,7 @@ class App extends Component {
     this.setState({
       gifts: response.data,
     });
+    console.log(response.data);
     return response;
   };
 
@@ -128,7 +128,7 @@ class App extends Component {
 
   filterGifts = query => {
     const filtered = this.state.gifts.filter(gift => {
-      if (query === 'initialSearchQuery') {
+      if (!query || query === '') {
         return gift;
       } else if (
         gift.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -142,6 +142,8 @@ class App extends Component {
       filteredGifts: filtered,
       currentQuery: query,
     });
+    console.log(this.state.gifts);
+    console.log(filtered);
   };
 
   render() {
@@ -159,13 +161,17 @@ class App extends Component {
             exact
             element={
               this.state.user ? (
-                <GiftList
-                  user={this.state.user}
-                  gifts={this.state.filteredGifts}
-                  editInterested={this.editInterested}
-                  setGift={this.setGift}
-                  filterGifts={this.filterGifts}
-                />
+                this.state.gifts ? (
+                  <GiftList
+                    user={this.state.user}
+                    gifts={this.state.filteredGifts}
+                    editInterested={this.editInterested}
+                    setGift={this.setGift}
+                    filterGifts={this.filterGifts}
+                  />
+                ) : (
+                  <Loading />
+                )
               ) : (
                 <LandingPage />
               )

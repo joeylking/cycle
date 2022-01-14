@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 
-const Search = ({ filterGifts }) => {
-  const [query, setQuery] = useState('initialSearchQuery');
+const Search = ({ gifts, filterGifts }) => {
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     filterGifts(query);

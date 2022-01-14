@@ -20,9 +20,10 @@ const GiftList = ({ user, gifts, editInterested, setGift, filterGifts }) => {
   const handleClick = gift => {
     setGift(gift);
   };
+
   return (
     <Container>
-      <Search filterGifts={filterGifts} />
+      <Search gifts={gifts} filterGifts={filterGifts} />
       <Row
         md={4}
         className='justify-content-center d-flex flex-wrap align-items-center mt-3 g-4'

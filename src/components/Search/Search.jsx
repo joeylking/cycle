@@ -21,7 +21,7 @@ const Search = ({ gifts, filterGifts }) => {
               type='text'
               name='search'
               placeholder='Search...'
-              className='border-end-0'
+              className='border-end-0 outline-none'
               onChange={handleChange}
             />
             <InputGroup.Text className='border-start-0 bg-white'>

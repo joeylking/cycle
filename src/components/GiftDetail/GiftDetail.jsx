@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import CommentForm from '../CommentForm/CommentForm';
+import Timer from '../Timer/Timer';
 
 const GiftDetail = ({ gift, user, editInterested }) => {
   const [comments, setComments] = useState([]);
@@ -11,7 +12,6 @@ const GiftDetail = ({ gift, user, editInterested }) => {
 
   useEffect(() => {
     getComments(gift.id);
-    console.log('giftdetail useeffect');
   }, []);
 
   const getComments = async gift_id => {
@@ -42,15 +42,11 @@ const GiftDetail = ({ gift, user, editInterested }) => {
   const addComment = async text => {
     const token = localStorage.getItem('token');
     const comment = { author: user.id, gift: gift.id, content: text };
-    console.log(comment);
     const response = await axios.post(
       `http://127.0.0.1:8000/api/comments/${gift.id}/`,
       comment,
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    console.log(response.data);
-    // setComments([...comments, response.data]);
-    console.log(comments);
     setShowCommentInput(false);
     getComments(gift.id);
   };
@@ -63,7 +59,6 @@ const GiftDetail = ({ gift, user, editInterested }) => {
       content: text,
       parent: parentID,
     };
-    console.log(comment);
     const response = await axios.post(
       `http://127.0.0.1:8000/api/comments/${gift.id}/`,
       comment,
@@ -72,7 +67,6 @@ const GiftDetail = ({ gift, user, editInterested }) => {
 
     setShowReplyInput(0);
     setParentID(null);
-    // setComments([...comments, response.data]);
     getComments(gift.id);
   };
 
@@ -92,10 +86,11 @@ const GiftDetail = ({ gift, user, editInterested }) => {
   };
 
   const parentComments = comments.filter(comment => comment.parent === null);
+  const expiration = new Date(
+    new Date(gift.created).getTime() + gift.hours_active * 60 * 60 * 1000
+  );
   return (
     <Container>
-      {console.log(gift)}
-      {console.log(comments)}
       <Row className='mt-3'>
         <Col>
           <img
@@ -118,6 +113,9 @@ const GiftDetail = ({ gift, user, editInterested }) => {
           </p>
           <p>Condition: {gift.condition}</p>
           <p>Description: {gift.description}</p>
+          <p>
+            Time Remaining: <Timer endDate={expiration} />
+          </p>
           {gift.giver.id !== user.id && (
             <>
               {gift.interested_users.includes(user.id) ? (
@@ -159,8 +157,6 @@ const GiftDetail = ({ gift, user, editInterested }) => {
             let replies = getReplies(comment.id);
             return (
               <div className='mt-2'>
-                {console.log(comment.content)}
-
                 <h3>
                   <img
                     src={`http://127.0.0.1:8000${comment.author.profile_pic}`}

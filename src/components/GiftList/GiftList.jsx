@@ -1,6 +1,7 @@
 import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Search from '../Search/Search';
+import Timer from '../Timer/Timer';
 
 const GiftList = ({ user, gifts, editInterested, setGift, filterGifts }) => {
   const active = gifts.filter(g => g.active === true);
@@ -31,11 +32,10 @@ const GiftList = ({ user, gifts, editInterested, setGift, filterGifts }) => {
         className='justify-content-center d-flex flex-wrap align-items-center mt-3 g-4'
       >
         {filtered.map(gift => {
-          let created = new Date(gift.created);
           let expiration = new Date(
-            created.getTime() + gift.hours_active * 60 * 60 * 1000
+            new Date(gift.created).getTime() +
+              gift.hours_active * 60 * 60 * 1000
           );
-          console.log(created, expiration);
           return (
             <Col>
               <Card
@@ -51,7 +51,7 @@ const GiftList = ({ user, gifts, editInterested, setGift, filterGifts }) => {
                   <Card.Title>{gift.name}</Card.Title>
                   <Card.Text style={{ height: '4rem' }}>
                     Condition: {gift.condition} <br />
-                    Time left: {gift.hours_active}
+                    Time left: <Timer endDate={expiration} />
                   </Card.Text>
                   <div className='text-center'>
                     <Link

@@ -22,7 +22,9 @@ const CommentForm = ({ submit, submitLabel }) => {
           onChange={handleChange}
         />
       </Form.Group>
-      <Button type='submit'>{submitLabel}</Button>
+      <Button type='submit' className='mt-2'>
+        {submitLabel}
+      </Button>
     </Form>
   );
 };

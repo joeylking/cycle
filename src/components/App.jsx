@@ -75,6 +75,7 @@ class App extends Component {
 
   addGift = async gift => {
     const token = localStorage.getItem('token');
+    console.log(gift);
     const response = await axios({
       method: 'POST',
       url: 'http://127.0.0.1:8000/api/gifts/',

@@ -2,51 +2,15 @@ import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 
 const GiftForm = ({ gift, submit }) => {
-  const [giver, setGiver] = useState(gift.giver);
-  const [winner, setWinner] = useState(gift.winner);
   const [name, setName] = useState(gift.name);
   const [description, setDescription] = useState(gift.description);
   const [category, setCategory] = useState(gift.category);
   const [condition, setCondition] = useState(gift.condition);
-  const [active, setActive] = useState(gift.active);
-  const [interestedUsers, setInterestedUsers] = useState(gift.interested_users);
   const [hoursActive, setHoursActive] = useState(gift.hours_active);
   const [image, setImage] = useState(gift.image);
 
-  //   giver: this.props.gift.giver,
-  //   winner: this.props.gift.winner,
-  //   name: this.props.gift.name,
-  //   description: this.props.gift.description,
-  //   category: this.props.gift.category,
-  //   condition: this.props.gift.condition,
-  //   active: this.props.gift.active,
-  //   interested_users: this.props.gift.interested_users,
-  //   hours_active: this.props.gift.hours_active,
-  //   image: this.props.gift.image,
-
-  //   handleChange = event => {
-  //     if ([event.target.name] === 'image') {
-  //       setImage(event.target.files[0]);
-  //     }
-  //     this.setState({
-  //       [event.target.name]: event.target.value,
-  //     });
-  //   };
-
   const handleSubmit = event => {
     event.preventDefault();
-    // const gift = {
-    //   giver: giver,
-    //   winner: winner,
-    //   name: name,
-    //   description: description,
-    //   category: category,
-    //   condition: condition,
-    //   active: active,
-    //   interested_users: interestedUsers,
-    //   hours_active: hoursActive,
-    //   image: image,
-    // };
     let formField = new FormData();
     formField.append('name', name);
     formField.append('description', description);

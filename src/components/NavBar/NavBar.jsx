@@ -83,7 +83,7 @@ const NavBar = ({ user, logout }) => {
               <Modal.Title>Please Login</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <LoginForm closeModal={closeModal} />
+              <LoginForm />
             </Modal.Body>
           </Modal>
         </Navbar.Collapse>

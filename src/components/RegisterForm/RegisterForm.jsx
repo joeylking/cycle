@@ -13,23 +13,6 @@ const RegisterForm = () => {
   const [state, setState] = useState();
   const [zipCode, setZipCode] = useState();
   const [profilePic, setProfilePic] = useState();
-  // username: '',
-  // password: '',
-  // email: '',
-  // first_name: '',
-  // last_name: '',
-  // street: '',
-  // city: '',
-  // state: '',
-  // zip_code: '',
-  // profile_pic: null,
-  // rating: null,
-
-  // handleChange = event => {
-  //   this.setState({
-  //     [event.target.name]: event.target.value,
-  //   });
-  // };
 
   const handleSubmit = event => {
     event.preventDefault();

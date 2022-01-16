@@ -113,6 +113,7 @@ const GiftDetail = ({ gift, user, editInterested }) => {
           </p>
           <p>Condition: {gift.condition}</p>
           <p>Description: {gift.description}</p>
+          <p>Winner picked: {expiration.toLocaleString()}</p>
           <p>
             Time Remaining: <Timer endDate={expiration} />
           </p>

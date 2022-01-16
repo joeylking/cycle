@@ -86,7 +86,7 @@ class Give extends Component {
         </Modal>
         <ListGroup className='mt-2'>
           {filtered.map(g => (
-            <ListGroup.Item>
+            <ListGroup.Item key={g.id}>
               <h1>{g.name}</h1>
               <Link
                 to='/Detail'

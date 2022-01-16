@@ -14,7 +14,6 @@ const LoginForm = ({ getUser, closeModal }) => {
     });
     const token = response.data.access;
     localStorage.setItem('token', token);
-    console.log('token set');
     window.location = '/';
     return token;
   };

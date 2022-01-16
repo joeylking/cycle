@@ -37,7 +37,7 @@ const GiftList = ({ user, gifts, editInterested, setGift, filterGifts }) => {
               gift.hours_active * 60 * 60 * 1000
           );
           return (
-            <Col>
+            <Col key={gift.id}>
               <Card
                 className='text-centered shadow border-0'
                 style={{ width: '17rem', height: '25rem' }}

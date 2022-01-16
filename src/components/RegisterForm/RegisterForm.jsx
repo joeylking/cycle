@@ -1,114 +1,138 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 
-class RegisterForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      password: '',
-      email: '',
-      first_name: '',
-      last_name: '',
-      street: '',
-      city: '',
-      state: '',
-      zip_code: '',
-      profile_pic: null,
-      rating: null,
-    };
-  }
+const RegisterForm = () => {
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const [email, setEmail] = useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [street, setStreet] = useState();
+  const [city, setCity] = useState();
+  const [state, setState] = useState();
+  const [zipCode, setZipCode] = useState();
+  const [profilePic, setProfilePic] = useState();
+  // username: '',
+  // password: '',
+  // email: '',
+  // first_name: '',
+  // last_name: '',
+  // street: '',
+  // city: '',
+  // state: '',
+  // zip_code: '',
+  // profile_pic: null,
+  // rating: null,
 
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  };
+  // handleChange = event => {
+  //   this.setState({
+  //     [event.target.name]: event.target.value,
+  //   });
+  // };
 
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
-    this.registerUser(this.state);
+    let formField = new FormData();
+    formField.append('username', username);
+    formField.append('password', password);
+    formField.append('email', email);
+    formField.append('first_name', firstName);
+    formField.append('last_name', lastName);
+    formField.append('street', street);
+    formField.append('city', city);
+    formField.append('state', state);
+    formField.append('zip_code', zipCode);
+    formField.append('profile_pic', profilePic);
+    registerUser(formField);
   };
 
-  registerUser = async user => {
+  const registerUser = async user => {
     await axios.post('http://127.0.0.1:8000/api/auth/register/', user);
+    login();
   };
 
-  render() {
-    return (
-      <Container>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Label> Username: </Form.Label>
-          <Form.Control
-            name='username'
-            value={this.state.username}
-            onChange={this.handleChange}
-          ></Form.Control>
-          <Form.Label> Password: </Form.Label>
-          <Form.Control
-            name='password'
-            type='password'
-            value={this.state.password}
-            onChange={this.handleChange}
-          ></Form.Control>
-          <Form.Label> Email: </Form.Label>
-          <Form.Control
-            name='email'
-            type='email'
-            value={this.state.email}
-            onChange={this.handleChange}
-          ></Form.Control>
-          <Form.Label> First Name: </Form.Label>
-          <Form.Control
-            name='first_name'
-            value={this.state.first_name}
-            onChange={this.handleChange}
-          ></Form.Control>
-          <Form.Label> Last Name: </Form.Label>
-          <Form.Control
-            name='last_name'
-            value={this.state.last_name}
-            onChange={this.handleChange}
-          ></Form.Control>
-          <Form.Label> Street and number: </Form.Label>
-          <Form.Control
-            name='street'
-            value={this.state.street}
-            onChange={this.handleChange}
-          ></Form.Control>
-          <Form.Label> City: </Form.Label>
-          <Form.Control
-            name='city'
-            value={this.state.city}
-            onChange={this.handleChange}
-          ></Form.Control>
-          <Form.Label> State: </Form.Label>
-          <Form.Control
-            name='state'
-            value={this.state.state}
-            onChange={this.handleChange}
-          ></Form.Control>
-          <Form.Label> ZIP: </Form.Label>
-          <Form.Control
-            name='zip_code'
-            value={this.state.zip_code}
-            onChange={this.handleChange}
-          ></Form.Control>
-          <Form.Label> Profile Pic: </Form.Label>
-          <Form.Control
-            name='profile_pic'
-            type='file'
-            value={this.state.profile_pic}
-            onChange={this.handleChange}
-          ></Form.Control>
-          <Button type='submit' className='mt-3'>
-            Register
-          </Button>
-        </Form>
-      </Container>
-    );
-  }
-}
+  const login = async () => {
+    const response = await axios.post('http://127.0.0.1:8000/api/auth/login/', {
+      username,
+      password,
+    });
+    const token = response.data.access;
+    localStorage.setItem('token', token);
+    window.location = '/';
+  };
+
+  return (
+    <Container>
+      <Form onSubmit={handleSubmit}>
+        <Form.Label> Username: </Form.Label>
+        <Form.Control
+          name='username'
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+        ></Form.Control>
+        <Form.Label> Password: </Form.Label>
+        <Form.Control
+          name='password'
+          type='password'
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        ></Form.Control>
+        <Form.Label> Email: </Form.Label>
+        <Form.Control
+          name='email'
+          type='email'
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        ></Form.Control>
+        <Form.Label> First Name: </Form.Label>
+        <Form.Control
+          name='firstName'
+          value={firstName}
+          onChange={e => setFirstName(e.target.value)}
+        ></Form.Control>
+        <Form.Label> Last Name: </Form.Label>
+        <Form.Control
+          name='lastName'
+          value={lastName}
+          onChange={e => setLastName(e.target.value)}
+        ></Form.Control>
+        <Form.Label> Street and number: </Form.Label>
+        <Form.Control
+          name='street'
+          value={street}
+          onChange={e => setStreet(e.target.value)}
+        ></Form.Control>
+        <Form.Label> City: </Form.Label>
+        <Form.Control
+          name='city'
+          value={city}
+          onChange={e => setCity(e.target.value)}
+        ></Form.Control>
+        <Form.Label> State: </Form.Label>
+        <Form.Control
+          name='state'
+          value={state}
+          onChange={e => setState(e.target.value)}
+        ></Form.Control>
+        <Form.Label> ZIP: </Form.Label>
+        <Form.Control
+          name='zipCode'
+          value={zipCode}
+          onChange={e => setZipCode(e.target.value)}
+        ></Form.Control>
+        <Form.Label> Profile Pic: </Form.Label>
+        <Form.Control
+          name='profile_pic'
+          type='file'
+          onChange={e => setProfilePic(e.target.files[0])}
+        ></Form.Control>
+        <Button type='submit' className='mt-3'>
+          Register
+        </Button>
+      </Form>
+    </Container>
+  );
+};
 
 export default RegisterForm;

@@ -56,7 +56,6 @@ class App extends Component {
     this.setState({
       gifts: response.data,
     });
-    console.log(response.data);
     return response;
   };
 
@@ -69,7 +68,6 @@ class App extends Component {
     this.setState({
       user: response.data,
     });
-    console.log(response.data);
     return response.data;
   };
 
@@ -84,7 +82,6 @@ class App extends Component {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response);
     this.getGifts();
   };
 
@@ -96,7 +93,6 @@ class App extends Component {
       data: gift,
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log(response);
     this.getGifts();
   };
 
@@ -108,7 +104,6 @@ class App extends Component {
       data: { interested_users: gift.interested_users },
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log(response);
     this.getGifts();
   };
 
@@ -143,8 +138,6 @@ class App extends Component {
       filteredGifts: filtered,
       currentQuery: query,
     });
-    console.log(this.state.gifts);
-    console.log(filtered);
   };
 
   render() {

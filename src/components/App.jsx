@@ -85,11 +85,11 @@ class App extends Component {
     this.getGifts();
   };
 
-  editGift = async gift => {
+  editGift = async (gift, id) => {
     const token = localStorage.getItem('token');
     const response = await axios({
       method: 'PUT',
-      url: `http://127.0.0.1:8000/api/gifts/${gift.id}/`,
+      url: `http://127.0.0.1:8000/api/gifts/${id}/`,
       data: gift,
       headers: { Authorization: `Bearer ${token}` },
     });

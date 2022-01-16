@@ -36,11 +36,9 @@ class Give extends Component {
     this.props.addGift(gift);
   };
 
-  handleEditSubmit = g => {
+  handleEditSubmit = gift => {
     this.handleCloseModal();
-    const gift = { ...g, id: this.state.gift.id };
-    console.log(gift);
-    this.props.editGift(gift);
+    this.props.editGift(gift, this.state.gift.id);
   };
 
   render() {

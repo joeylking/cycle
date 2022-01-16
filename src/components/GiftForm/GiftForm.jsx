@@ -11,6 +11,7 @@ const GiftForm = ({ gift, submit }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
+    console.log(image);
     let formField = new FormData();
     formField.append('name', name);
     formField.append('description', description);
@@ -18,7 +19,6 @@ const GiftForm = ({ gift, submit }) => {
     formField.append('condition', condition);
     formField.append('hours_active', hoursActive);
     formField.append('image', image);
-    console.log(formField);
     submit(formField);
   };
 

@@ -1,9 +1,10 @@
+import '../LandingPage/LandingPage.css';
 import hero from '../../img/give.jpg';
 import { Container } from 'react-bootstrap';
 
 const LandingPage = () => {
   return (
-    <Container fluid>
+    <>
       <img
         src={hero}
         alt='hero'
@@ -14,7 +15,11 @@ const LandingPage = () => {
           position: 'relative',
         }}
       />
-    </Container>
+      <div className='hero-text'>
+        <h1>Cycle</h1>
+        <p>Give, Receive, Build Community</p>
+      </div>
+    </>
   );
 };
 

@@ -70,8 +70,10 @@ const GiftForm = ({ gift, submit }) => {
           <option value='Garden & Outdoors'>Garden & Outdoors</option>
           <option value='Exercise & Fitness'>Exercise & Fitness</option>
           <option value='Cleaning Supplies'>Cleaning Supplies</option>
+          <option value='Musical Instruments'>Musical Instruments</option>
+          <option value='Miscellaneous'>Miscellaneous</option>
           <option value='Medice, Vitamins & Supplements'>
-            Medice, Vitamins & Supplements'
+            Medice, Vitamins & Supplements
           </option>
         </Form.Select>
       </Form.Group>

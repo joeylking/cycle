@@ -86,6 +86,7 @@ class Give extends Component {
           {filtered.map(g => (
             <ListGroup.Item key={g.id}>
               <h1>{g.name}</h1>
+              <p>Interested: {g.interested_users.length}</p>
               <Link
                 to='/Detail'
                 className='btn btn-primary btn-sm me-2'

@@ -17,7 +17,7 @@ const LandingPage = () => {
       />
       <div className='hero-text'>
         <h1>Cycle</h1>
-        <p>Give, Receive, Build Community</p>
+        <h4>Give, Receive, Build Community</h4>
       </div>
     </>
   );
